@@ -2,6 +2,24 @@ import NextImage from "next/image";
 import { Box, List, ListItem, ListIcon, Divider, Center, LinkBox, LinkOverlay} from "@chakra-ui/layout";
 import {MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavorite} from "react-icons/md";
 
+const NavMenu = [
+  {
+    name: "Home",
+    icon: MdHome,
+    route: '/'
+  },
+  {
+    name: "Search",
+    icon: MdSearch,
+    route: '/search'
+  },
+  {
+    name: "Your Library",
+    icon: MdLibraryMusic,
+    route: '/library'
+  }
+]
+
 const Sidebar = () => {
   return (
     <Box
