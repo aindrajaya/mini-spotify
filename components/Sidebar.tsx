@@ -15,7 +15,11 @@ const Sidebar = () => {
         <Box width="120px" marginBottom="20px" paddingY="20px">
           <NextImage src="/logo.svg" height={60} width={120}/>
         </Box>
-        Sidebar Menu
+        <Box marginBottom="20px">
+          <List spacing={2}>
+          Sidebar Layout Menu
+          </List>
+        </Box>
       </Box>
     </Box>
   )
