@@ -19,3 +19,15 @@ model User {
   password  String
   playlist  Playlist[]
 }
+
+model Song {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  artist    Artist     @relation(fields: [artistId], references: [id])
+  artistId  Int
+  playlist  Playlist[]
+  duration  Int
+  url       String
+}
