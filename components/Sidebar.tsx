@@ -21,6 +21,19 @@ const NavMenu = [
   }
 ]
 
+const MusicMenu = [
+  {
+    name: "Create Playlist",
+    icon: MdPlaylistAdd,
+    route: '/'
+  },
+  {
+    name: "Favorites",
+    icon: MdFavorite,
+    route: '/favorite'
+  },
+]
+
 const Sidebar = () => {
   return (
     <Box
