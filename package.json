@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint"
   },
   "dependencies": {
     "@chakra-ui/layout": "^1.5.1",
@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
+    "@types/cookie": "0.5.1",
+    "@types/jsonwebtoken": "9.0.1",
     "@types/react": "17.0.53",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
