@@ -1,20 +1,22 @@
 import { Box, Text, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
-import Head from "next/head";
 import { ReactChild, ReactFragment, ReactPortal } from "react";
 import GradientLayout from "../components/GradientLayout";
+import { useMe } from "../lib/hooks";
 import prisma from "../lib/prisma";
-import styles from "../styles/Home.module.css";
 
 const Home = ({ artists }) => {
+  const { user } = useMe();
+  console.log(user, "data user");
+
   return (
     <GradientLayout
       color="orange"
       children={undefined}
       image="https://www.pngkit.com/png/detail/2-25926_john-cena-orange-john-cena-thor-ragnarok.png"
       subtitle="Profile"
-      title="John Cenna"
-      description="Yeah that's it 5 playlist"
+      title={`${user?.firstName} ${user?.lastName}`}
+      description={`Yeah that's it ${user?.playlistCount} playlist`}
       roundImage={undefined}
     >
       <Box color="white" paddingX="40px">
