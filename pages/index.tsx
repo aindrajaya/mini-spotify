@@ -1,12 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import GradientLayout from "../components/GradientLayout";
-// import { Inter } from "@next/font/google";
+import prisma from "../lib/prisma";
 import styles from "../styles/Home.module.css";
 
-// const inter = Inter({ subsets: ["latin"] })
-
-const Home = () => {
+const Home = ({ artists }) => {
   return (
     <GradientLayout
       color="orange"
@@ -20,6 +18,14 @@ const Home = () => {
       HEllo
     </GradientLayout>
   );
+};
+
+export const getServerSideProps = async () => {
+  const artists = await prisma.artist.findMany({});
+
+  return {
+    props: { artists },
+  };
 };
 
 export default Home;
