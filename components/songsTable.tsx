@@ -72,8 +72,8 @@ const SongsTable = ({ songs }) => {
                 >
                   <Td>{i + 1}</Td>
                   <Td>{song.name}</Td>
-                  <Td>{song.createdAt?.toLocaleString()}</Td>
-                  <Td>{song.duration}</Td>
+                  <Td>{formatDate(song.createdAt)}</Td>
+                  <Td>{formatTime(song.duration)}</Td>
                 </Tr>
               )
             )}
