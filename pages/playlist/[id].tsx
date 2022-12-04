@@ -1,4 +1,5 @@
 import GradientLayout from "../../components/GradientLayout";
+import SongsTable from "../../components/songsTable";
 import { ValidateToken } from "../../lib/auth";
 import prisma from "../../lib/prisma";
 
@@ -21,8 +22,15 @@ const Playlist = ({ playlist }) => {
   const color = getBGColor(playlist.id);
 
   return (
-    <GradientLayout color={color}>
-      <div>{playlist.name}</div>
+    <GradientLayout
+      color={color}
+      roundImage={false}
+      title={playlist.name}
+      subtitle="playlist"
+      description={`${playlist.songs.length} songs`}
+      image={`https://picsum.photos/400?random=${playlist.id}`}
+    >
+      <SongsTable songs={playlist.songs} />
     </GradientLayout>
   )
 };
