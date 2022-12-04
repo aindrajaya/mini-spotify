@@ -111,7 +111,7 @@ const Sidebar = () => {
         <Divider marginY="10px" color="gray.800" />
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List>
-            {playlists.map(
+            {playlists?.map(
               (playlist: {
                 id: Key | null | undefined;
                 name:
