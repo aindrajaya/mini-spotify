@@ -7,6 +7,9 @@ import { Key, ReactChild, ReactFragment, ReactPortal } from "react";
 import { formatDate, formatTime } from "../lib/formatters";
 
 const SongsTable = ({ songs }) => {
+  const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
+  const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
+
   return (
     <Box bg="transparent" color="white">
       <Box padding="10px" marginBottom="20px">
