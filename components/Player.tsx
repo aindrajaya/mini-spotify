@@ -44,7 +44,7 @@ const Player = ({ songs, activeSong }) => {
     setRepeat((state) => !state);
   };
 
-  // onEnd function, to handle next button so it can go to the next song automatically after it clicked
+  // onEnd function, to handle next button so it can go to the next song after it clicked
   const nextSong = () => {
     setIndex((state) => {
       if (shuffle) {
@@ -65,6 +65,18 @@ const Player = ({ songs, activeSong }) => {
       return state ? state - 1 : songs.length - 1;
     });
   };
+
+  // this will handle automatically go to the next music
+  const onEnd = () => {
+    if (repeat) {
+      setSeek(0); // for the ui
+      soundRef.current.seek(0); // setback the state
+    } else {
+      nextSong();
+    }
+  };
+
+  // implement onload
 
   return (
     <Box>
