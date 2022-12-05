@@ -30,6 +30,7 @@ const Player = ({ songs, activeSong }) => {
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
+  const soundRef = useRef(null);
 
   const setPlayState = (value) => {
     setPlaying(value);
@@ -43,10 +44,22 @@ const Player = ({ songs, activeSong }) => {
     setRepeat((state) => !state);
   };
 
+  //onEnd function, to handle next button so it can go to the next song automatically after it clicked
+  const nextSong = () => {
+    //code must be here
+  }
+
+  //previous button, to go back at the previous list song
+  const prevSong = () => {
+    setIndex((state) => {
+      return state ? state - 1 : songs.length - 1;
+    });
+  };
+
   return (
     <Box>
       <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} />
+        <ReactHowler playing={playing} src={activeSong?.url} ref={soundRef} />
       </Box>
       <Center color="gray.600">
         <ButtonGroup>
