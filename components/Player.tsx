@@ -44,12 +44,22 @@ const Player = ({ songs, activeSong }) => {
     setRepeat((state) => !state);
   };
 
-  //onEnd function, to handle next button so it can go to the next song automatically after it clicked
+  // onEnd function, to handle next button so it can go to the next song automatically after it clicked
   const nextSong = () => {
-    //code must be here
-  }
+    setIndex((state) => {
+      if (shuffle) {
+        const next = Math.floor(Math.random() * songs.length);
+        if (next === state) {
+          return nextSong(); // recursion
+        }
+        return next;
+      }
 
-  //previous button, to go back at the previous list song
+      return state === songs.length - 1 ? 0 : state + 1;
+    });
+  };
+
+  // previous button, to go back at the previous list song
   const prevSong = () => {
     setIndex((state) => {
       return state ? state - 1 : songs.length - 1;
