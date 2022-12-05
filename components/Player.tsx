@@ -31,6 +31,18 @@ const Player = ({ songs, activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
 
+  const setPlayState = (value) => {
+    setPlaying(value);
+  };
+
+  const onShuffle = () => {
+    setShuffle((state) => !state);
+  };
+
+  const onRepeat = () => {
+    setRepeat((state) => !state);
+  };
+
   return (
     <Box>
       <Box>
