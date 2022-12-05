@@ -14,10 +14,13 @@ const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-
-    await auth(mode, { email, password });
-    setIsLoading(false);
-    router.push("/");
+    try {
+      await auth(mode, { email, password });
+      setIsLoading(false);
+      router.push("/");
+    } catch (error) {
+      return error;
+    }
   };
 
   return (
@@ -60,6 +63,6 @@ const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
       </Flex>
     </Box>
   );
-}
+};
 
 export default AuthForm;
