@@ -10,8 +10,9 @@ const SongsTable = ({ songs }) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
 
-  const handlePlay = (activeSong?: any) => {
+  const handlePlay = (activeSong?) => {
     setActiveSong(activeSong || songs[0]);
+    playSongs(songs);
   };
 
   return (
