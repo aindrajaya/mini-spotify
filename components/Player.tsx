@@ -76,7 +76,12 @@ const Player = ({ songs, activeSong }) => {
     }
   };
 
-  // implement onload
+  // implement onload - to guaranty the duration is the same from the howler player and database duration data
+  const onLoad = () => {
+    const songDuration = soundRef.current.duration();
+    setDuration(songDuration);
+  }
+
 
   return (
     <Box>
