@@ -88,13 +88,6 @@ const Player = ({ songs, activeSong }) => {
             variant="link"
             aria-label="shuffle"
             fontSize="24px"
-            icon={<MdOutlinePauseCircleFilled />}
-          />
-          <IconButton
-            outline="none"
-            variant="link"
-            aria-label="shuffle"
-            fontSize="24px"
             icon={<MdSkipNext />}
           />
           <IconButton
