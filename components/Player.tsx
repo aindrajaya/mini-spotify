@@ -114,6 +114,7 @@ const Player = ({ songs, activeSong }) => {
             aria-label="shuffle"
             fontSize="24px"
             icon={<MdSkipPrevious />}
+            onClick={prevSong}
           />
           {playing ? (
             <IconButton
@@ -140,6 +141,7 @@ const Player = ({ songs, activeSong }) => {
             aria-label="shuffle"
             fontSize="24px"
             icon={<MdSkipNext />}
+            onClick={nextSong}
           />
           <IconButton
             outline="none"
