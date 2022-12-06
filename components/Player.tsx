@@ -123,6 +123,7 @@ const Player = ({ songs, activeSong }) => {
             fontSize="24px"
             color={shuffle ? "white" : "gray.600"}
             icon={<MdShuffle />}
+            onClick={onShuffle}
           />
           <IconButton
             outline="none"
@@ -165,7 +166,9 @@ const Player = ({ songs, activeSong }) => {
             outline="none"
             variant="link"
             aria-label="repeat"
+            color={repeat ? "white" : "gray.600"}
             fontSize="24px"
+            onClick={onRepeat}
             icon={<MdOutlineRepeat />}
           />
         </ButtonGroup>
