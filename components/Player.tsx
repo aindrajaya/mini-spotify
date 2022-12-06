@@ -107,12 +107,13 @@ const Player = ({ songs, activeSong }) => {
             variant="link"
             aria-label="shuffle"
             fontSize="24px"
+            color={shuffle ? "white" : "gray.600"}
             icon={<MdShuffle />}
           />
           <IconButton
             outline="none"
             variant="link"
-            aria-label="shuffle"
+            aria-label="skip"
             fontSize="24px"
             icon={<MdSkipPrevious />}
             onClick={prevSong}
@@ -121,25 +122,27 @@ const Player = ({ songs, activeSong }) => {
             <IconButton
               outline="none"
               variant="link"
-              aria-label="shuffle"
-              fontSize="24px"
+              aria-label="pause"
+              fontSize="40px"
+              color="white"
               icon={<MdOutlinePauseCircleFilled />}
-              onClick={() => setPlaying(true)}
+              onClick={() => setPlaying(false)}
             />
           ) : (
             <IconButton
               outline="none"
               variant="link"
-              aria-label="shuffle"
-              fontSize="24px"
+              aria-label="play"
+              fontSize="40px"
+              color="white"
               icon={<MdOutlinePlayCircleFilled />}
-              onClick={() => setPlaying(false)}
+              onClick={() => setPlaying(true)}
             />
           )}
           <IconButton
             outline="none"
             variant="link"
-            aria-label="shuffle"
+            aria-label="next"
             fontSize="24px"
             icon={<MdSkipNext />}
             onClick={nextSong}
@@ -147,7 +150,7 @@ const Player = ({ songs, activeSong }) => {
           <IconButton
             outline="none"
             variant="link"
-            aria-label="shuffle"
+            aria-label="repeat"
             fontSize="24px"
             icon={<MdOutlineRepeat />}
           />
@@ -156,7 +159,7 @@ const Player = ({ songs, activeSong }) => {
       <Box color="gray.600">
         <Flex justify="center" align="center">
           <Box width="10%">
-            <Text>0.0</Text>
+            <Text>{formatTime(seek)}</Text>
           </Box>
           <Box width="80%">
             <RangeSlider
@@ -164,7 +167,7 @@ const Player = ({ songs, activeSong }) => {
               step={0.1}
               min={0}
               id="player-range"
-              max={duration ? duration.toFixed(2) : 0}
+              max={duration ? (duration.toFixed(2) as unknown as number) : 0}
               onChange={onSeek}
               value={[seek]}
               onChangesStart={() => setIsSeeking(true)}
@@ -177,7 +180,7 @@ const Player = ({ songs, activeSong }) => {
             </RangeSlider>
           </Box>
           <Box width="10%" textAlign="right">
-            <Text fontSize="xs">Duration</Text>
+            <Text fontSize="xs">{formatTime(duration)}</Text>
           </Box>
         </Flex>
       </Box>
