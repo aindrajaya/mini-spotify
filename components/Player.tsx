@@ -80,13 +80,24 @@ const Player = ({ songs, activeSong }) => {
   const onLoad = () => {
     const songDuration = soundRef.current.duration();
     setDuration(songDuration);
-  }
+  };
 
+  // when you do with the seek bar, drag left and righ
+  const onSeek = (e) => {
+    setSeek(parseFloat(e[0])); // update the ui
+    soundRef.current.seek(e[0]); // update the music itself
+  };
 
   return (
     <Box>
       <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} ref={soundRef} />
+        <ReactHowler
+          playing={playing}
+          src={activeSong?.url}
+          ref={soundRef}
+          onLoad={onLoad}
+          onEnd={onEnd}
+        />
       </Box>
       <Center color="gray.600">
         <ButtonGroup>
