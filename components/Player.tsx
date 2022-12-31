@@ -22,8 +22,9 @@ import {
 } from "react-icons/md";
 import { useStoreActions } from "easy-peasy";
 import { formatTime } from "../lib/formatters";
+import { PlayerProps } from "./types/PlayerProps";
 
-const Player = ({ songs, activeSong }) => {
+const Player = ({ songs, activeSong }: PlayerProps) => {
   const [playing, setPlaying] = useState(true);
   const [index, setIndex] = useState(
     songs.findIndex((s) => s.id === activeSong.id)
