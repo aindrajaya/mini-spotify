@@ -60,9 +60,9 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
     repeatRef.current = repeat;
   }, [repeat]);
 
-  const setPlayState = (value) => {
-    setPlaying(value);
-  };
+  // const setPlayState = (value) => {
+  //   setPlaying(value);
+  // };
 
   const onShuffle = () => {
     setShuffle((state) => !state);
@@ -128,8 +128,8 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
   };
 
   // when you do with the seek bar, drag left and righ
-  const onSeek = (e) => {
-    setSeek(parseFloat(e[0])); // update the ui
+  const onSeek = (e: number[]) => {
+    setSeek(e[0]); // update the ui
     // soundRef.current.seek(e[0]); // update the music itself
     if (soundRef.current) {
       soundRef.current.seek(e[0]); // update the music itself
@@ -213,6 +213,7 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
           </Box>
           <Box width="80%">
             <RangeSlider
+              // eslint-disable-next-line jsx-a11y/aria-proptypes
               aria-label={["min", "max"]}
               step={0.1}
               min={0}
@@ -220,7 +221,7 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
               max={duration ? (duration.toFixed(2) as unknown as number) : 0}
               onChange={onSeek}
               value={[seek]}
-              onChangesStart={() => setIsSeeking(true)}
+              onChangeStart={() => setIsSeeking(true)}
               onChangeEnd={() => setIsSeeking(false)}
             >
               <RangeSliderTrack>
