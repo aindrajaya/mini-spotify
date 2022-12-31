@@ -34,16 +34,16 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
-  const soundRef = useRef(null);
+  const soundRef = useRef<ReactHowler | null>(null);
   const repeatRef = useRef(repeat);
   const setActiveSong = useStoreActions((state: any) => state.changeActiveSong);
 
   useEffect(() => {
     let timerId: number;
 
-    if (playing && !isSeeking) {
+    if (playing && !isSeeking && soundRef.current) {
       const f = () => {
-        setSeek(soundRef.current.seek());
+        setSeek(soundRef.current!.seek());
         timerId = requestAnimationFrame(f);
       };
 
@@ -73,18 +73,31 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
   };
 
   // onEnd function, to handle next button so it can go to the next song after it clicked
+  // const nextSong = () => {
+  //   setIndex((state: number): number => {
+  //     if (shuffle) {
+  //       const next = Math.floor(Math.random() * songs.length);
+  //       if (next === state) {
+  //         return nextSong(); // recursion
+  //       }
+  //       return next;
+  //     }
+
+  //     return state === songs.length - 1 ? 0 : state + 1;
+  //   });
+  // };
   const nextSong = () => {
-    setIndex((state) => {
+    const getNextIndex = (currentState: number): number => {
       if (shuffle) {
         const next = Math.floor(Math.random() * songs.length);
-        if (next === state) {
-          return nextSong(); // recursion
+        if (next === currentState) {
+          return getNextIndex(currentState); // recursion
         }
         return next;
       }
-
-      return state === songs.length - 1 ? 0 : state + 1;
-    });
+      return currentState === songs.length - 1 ? 0 : currentState + 1;
+    };
+    setIndex((state: number): number => getNextIndex(state));
   };
 
   // previous button, to go back at the previous list song
@@ -98,7 +111,7 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
   const onEnd = () => {
     if (repeat) {
       setSeek(0); // for the ui
-      soundRef.current.seek(0); // setback the state
+      soundRef.current?.seek(0); // setback the state using optional chaining
     } else {
       nextSong();
     }
@@ -106,14 +119,21 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
 
   // implement onload - to guaranty the duration is the same from the howler player and database duration data
   const onLoad = () => {
-    const songDuration = soundRef.current.duration();
-    setDuration(songDuration);
+    // const songDuration = soundRef.current.duration();
+    // setDuration(songDuration);
+    if (soundRef.current) {
+      const songDuration = soundRef.current.duration();
+      setDuration(songDuration);
+    }
   };
 
   // when you do with the seek bar, drag left and righ
   const onSeek = (e) => {
     setSeek(parseFloat(e[0])); // update the ui
-    soundRef.current.seek(e[0]); // update the music itself
+    // soundRef.current.seek(e[0]); // update the music itself
+    if (soundRef.current) {
+      soundRef.current.seek(e[0]); // update the music itself
+    }
   };
 
   return (
