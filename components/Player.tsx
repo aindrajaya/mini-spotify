@@ -39,7 +39,7 @@ const Player = ({ songs, activeSong }: PlayerProps) => {
   const setActiveSong = useStoreActions((state: any) => state.changeActiveSong);
 
   useEffect(() => {
-    let timerId;
+    let timerId: number;
 
     if (playing && !isSeeking) {
       const f = () => {
