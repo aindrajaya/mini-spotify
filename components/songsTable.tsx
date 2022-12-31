@@ -5,12 +5,13 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { useStoreActions } from "easy-peasy";
 import { Key, ReactChild, ReactFragment, ReactPortal } from "react";
 import { formatDate, formatTime } from "../lib/formatters";
+import { Song } from "./types/Song";
 
-const SongsTable = ({ songs }) => {
+const SongsTable = ({ songs }: { songs: Song[] }) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
 
-  const handlePlay = (activeSong?) => {
+  const handlePlay = (activeSong?: Song) => {
     setActiveSong(activeSong || songs[0]);
     playSongs(songs);
   };
