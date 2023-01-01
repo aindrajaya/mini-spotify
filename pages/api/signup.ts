@@ -14,6 +14,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         email,
         password: bcrypt.hashSync(password, salt),
+        firstName: "", // Provide a default or empty value if applicable
+        lastName: "", // Provide a default or empty value if applicable
       },
     });
   } catch (error) {
