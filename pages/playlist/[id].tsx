@@ -1,7 +1,14 @@
+import { JwtPayload } from "jsonwebtoken";
+import { GetServerSidePropsContext } from "next";
 import GradientLayout from "../../components/GradientLayout";
 import SongsTable from "../../components/songsTable";
 import { ValidateToken } from "../../lib/auth";
 import prisma from "../../lib/prisma";
+import { Playlist } from "../../components/types/Playlist";
+
+interface TokenPayload extends JwtPayload {
+  id: number;
+}
 
 const getBGColor = (id: any) => {
   const colors = [
@@ -18,7 +25,7 @@ const getBGColor = (id: any) => {
   return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)];
 };
 
-const Playlist = ({ playlist }) => {
+const PlaylistList = ({ playlist }: { playlist: Playlist }) => {
   const color = getBGColor(playlist.id);
 
   return (
@@ -35,11 +42,23 @@ const Playlist = ({ playlist }) => {
   )
 };
 
-export const getServerSideProps = async ({ query, req }) => {
-  const { id } = ValidateToken(req.cookies.TRAX_ACCESS_TOKEN);
+export const getServerSideProps = async ({
+  query,
+  req,
+}: GetServerSidePropsContext) => {
+  const { id } = ValidateToken(req.cookies.TRAX_ACCESS_TOKEN) as TokenPayload;
+  const playlistId = query.id as string | undefined;
+
+  if (!playlistId) {
+    // Handle the case when query.id is undefined
+    return {
+      notFound: true,
+    };
+  }
+
   const [playlist] = await prisma.playlist.findMany({
     where: {
-      id: +query.id,
+      id: +playlistId,
       userId: id,
     },
     include: {
@@ -61,4 +80,4 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 };
 
-export default Playlist;
+export default PlaylistList;
