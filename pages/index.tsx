@@ -4,19 +4,19 @@ import { ReactChild, ReactFragment, ReactPortal } from "react";
 import GradientLayout from "../components/GradientLayout";
 import { useMe } from "../lib/hooks";
 import prisma from "../lib/prisma";
+import { Artist } from "../components/types/Artist";
 
-const Home = ({ artists }) => {
+const Home = ({ artists }: { artists: Artist[] }) => {
   const { user } = useMe();
 
   return (
     <GradientLayout
       color="orange"
-      children={undefined}
       image="https://www.pngkit.com/png/detail/2-25926_john-cena-orange-john-cena-thor-ragnarok.png"
       subtitle="Profile"
       title={`${user?.firstName} ${user?.lastName}`}
       description={`Yeah that's it ${user?.playlistCount} playlist`}
-      roundImage={undefined}
+      roundImage
     >
       <Box color="white" paddingX="40px">
         <Box marginBottom="40px">
