@@ -39,7 +39,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className={styles.center} style={{marginBottom:'50vh'}}>
+        <div className={styles.center} style={{ marginBottom: "50vh" }}>
           <Image
             className={styles.logo}
             src="/next.svg"
@@ -60,7 +60,7 @@ const Home = () => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
 export default Home;
