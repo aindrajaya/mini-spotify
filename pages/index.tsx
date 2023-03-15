@@ -7,7 +7,6 @@ import prisma from "../lib/prisma";
 
 const Home = ({ artists }) => {
   const { user } = useMe();
-  console.log(user, "data user");
 
   return (
     <GradientLayout
