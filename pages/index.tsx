@@ -62,10 +62,14 @@ const Home = ({ artists }) => {
 };
 
 export const getServerSideProps = async () => {
-  const artists = await prisma.artist.findMany({});
-  return {
-    props: { artists },
-  };
+  try {
+    const artists = await prisma.artist.findMany({});
+    return {
+      props: { artists },
+    };
+  } catch (error) {
+    return error;
+  }
 };
 
 export default Home;
