@@ -1,5 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
+import { GradientLayoutProps } from "./types/GradientLayoutProps";
 
 const GradientLayout = ({
   color,
@@ -9,7 +10,7 @@ const GradientLayout = ({
   title,
   description,
   roundImage,
-}) => {
+}: GradientLayoutProps) => {
   return (
     <Box
       height="100%"
